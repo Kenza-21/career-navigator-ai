@@ -2,8 +2,9 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import FeatureCard from "@/components/cards/FeatureCard";
+import Navbar from "@/components/layout/Navbar";
 import { 
-  Sparkles, 
+  Bot, 
   FileSearch, 
   Target, 
   CheckCircle, 
@@ -26,7 +27,7 @@ const features = [
   {
     title: "Coach IA Smart",
     description: "Votre coach carrière personnel avec Coach Karim pour des conseils personnalisés.",
-    icon: Sparkles,
+    icon: Bot,
     href: "/smart-assistant",
     gradient: "user" as const,
   },
@@ -69,6 +70,9 @@ const stats = [
 const Index = () => {
   return (
     <div className="min-h-screen">
+      {/* Navbar - transparent variant for hero */}
+      <Navbar variant="transparent" />
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-hero">
         {/* Animated background elements */}
@@ -91,7 +95,7 @@ const Index = () => {
           />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 text-center pt-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -99,7 +103,7 @@ const Index = () => {
           >
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8">
-              <Sparkles className="w-4 h-4 text-primary" />
+              <Briefcase className="w-4 h-4 text-primary" />
               <span className="text-sm font-medium text-primary-foreground/90">
                 Plateforme #1 pour le marché marocain
               </span>
@@ -216,7 +220,7 @@ const Index = () => {
           <Link to="/smart-assistant">
             <Button variant="glass" size="xl" className="group">
               Discuter avec Coach Karim
-              <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+              <Bot className="w-5 h-5 group-hover:rotate-12 transition-transform" />
             </Button>
           </Link>
         </motion.div>
@@ -227,7 +231,7 @@ const Index = () => {
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 gradient-coach rounded-lg flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-primary-foreground" />
+              <Briefcase className="w-4 h-4 text-primary-foreground" />
             </div>
             <span className="font-semibold text-foreground">Career Match AI</span>
           </div>
