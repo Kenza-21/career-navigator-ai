@@ -3,39 +3,46 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { 
-  Sparkles, 
   FileSearch, 
   Target, 
   CheckCircle, 
   FileText, 
   Menu, 
   X,
-  MessageSquare
+  MessageSquare,
+  Bot,
+  Briefcase
 } from "lucide-react";
 
 const navItems = [
   { path: "/assistant", label: "Assistant", icon: MessageSquare },
-  { path: "/smart-assistant", label: "Coach IA", icon: Sparkles },
+  { path: "/smart-assistant", label: "Coach IA", icon: Bot },
   { path: "/cv-analyzer", label: "Analyseur CV", icon: FileSearch },
   { path: "/ats-optimizer", label: "Optimiseur ATS", icon: Target },
   { path: "/ats-evaluator", label: "Évaluateur ATS", icon: CheckCircle },
   { path: "/cv-builder", label: "Créateur CV", icon: FileText },
 ];
 
-export function Navbar() {
+interface NavbarProps {
+  variant?: "default" | "transparent";
+}
+
+export function Navbar({ variant = "default" }: NavbarProps) {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const isTransparent = variant === "transparent";
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass">
+    <nav className={`fixed top-0 left-0 right-0 z-50 ${isTransparent ? "bg-transparent" : "glass"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <div className="w-10 h-10 gradient-coach rounded-xl flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-primary-foreground" />
+              <Briefcase className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-bold text-gradient-coach hidden sm:block">
+            <span className={`text-xl font-bold hidden sm:block ${isTransparent ? "text-primary-foreground" : "text-gradient-coach"}`}>
               Career Match AI
             </span>
           </Link>
@@ -50,7 +57,13 @@ export function Navbar() {
                   <Button
                     variant={isActive ? "coach" : "ghost"}
                     size="sm"
-                    className={`gap-2 ${isActive ? "" : "text-muted-foreground hover:text-foreground"}`}
+                    className={`gap-2 ${
+                      isActive 
+                        ? "" 
+                        : isTransparent 
+                          ? "text-primary-foreground/80 hover:text-primary-foreground hover:bg-white/10" 
+                          : "text-muted-foreground hover:text-foreground"
+                    }`}
                   >
                     <Icon className="w-4 h-4" />
                     {item.label}
@@ -64,7 +77,7 @@ export function Navbar() {
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden"
+            className={`lg:hidden ${isTransparent ? "text-primary-foreground hover:bg-white/10" : ""}`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
