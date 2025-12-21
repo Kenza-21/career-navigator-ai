@@ -34,7 +34,7 @@ export function Navbar({ variant = "default" }: NavbarProps) {
   const isTransparent = variant === "transparent";
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 ${isTransparent ? "bg-transparent" : "glass"}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 ${isTransparent ? "bg-transparent" : "bg-navbar border-b border-border"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -42,7 +42,7 @@ export function Navbar({ variant = "default" }: NavbarProps) {
             <div className="w-10 h-10 gradient-coach rounded-xl flex items-center justify-center">
               <Briefcase className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span className={`text-xl font-bold hidden sm:block ${isTransparent ? "text-primary-foreground" : "text-gradient-coach"}`}>
+            <span className="text-xl font-bold hidden sm:block text-navbar-link">
               Career Match AI
             </span>
           </Link>
@@ -60,9 +60,7 @@ export function Navbar({ variant = "default" }: NavbarProps) {
                     className={`gap-2 ${
                       isActive 
                         ? "" 
-                        : isTransparent 
-                          ? "text-primary-foreground/80 hover:text-primary-foreground hover:bg-white/10" 
-                          : "text-muted-foreground hover:text-foreground"
+                        : "text-navbar-link hover:text-navbar-hover hover:bg-navbar-hover/10"
                     }`}
                   >
                     <Icon className="w-4 h-4" />
@@ -77,7 +75,7 @@ export function Navbar({ variant = "default" }: NavbarProps) {
           <Button
             variant="ghost"
             size="icon"
-            className={`lg:hidden ${isTransparent ? "text-primary-foreground hover:bg-white/10" : ""}`}
+            className="lg:hidden text-navbar-link hover:text-navbar-hover hover:bg-navbar-hover/10"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -92,7 +90,7 @@ export function Navbar({ variant = "default" }: NavbarProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden glass border-t border-border"
+            className="lg:hidden bg-navbar border-t border-border"
           >
             <div className="px-4 py-3 space-y-1">
               {navItems.map((item) => {
@@ -106,7 +104,9 @@ export function Navbar({ variant = "default" }: NavbarProps) {
                   >
                     <Button
                       variant={isActive ? "coach" : "ghost"}
-                      className="w-full justify-start gap-3"
+                      className={`w-full justify-start gap-3 ${
+                        isActive ? "" : "text-navbar-link hover:text-navbar-hover"
+                      }`}
                     >
                       <Icon className="w-5 h-5" />
                       {item.label}
